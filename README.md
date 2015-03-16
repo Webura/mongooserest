@@ -45,15 +45,17 @@ var Book = mongoose.model('book', book);
 
 
 ``` javascript
+//Get all
 $.JSON('/api/book', function(books){
     console.log(books); // [{title: "Book1", _id: 11111111}, {title: "Book2", _id:22222222}]
 });
 
+//Get by id
 $.JSON('/api/book/11111111', function(book){
     console.log(book); // {title: "Book1", _id: 11111111}
 });
 
-//Special queries
+//Filter
 var query = encodeURI(JSON.stringify({title: "book2"}));
 $.JSON('/api/book?query=' + query, function(books){
     console.log(books); // [{title: "Book2", _id:22222222}]
@@ -62,10 +64,10 @@ $.JSON('/api/book?query=' + query, function(books){
 
 //For paging large data set
 $.JSON('/api/book/count', function(result){
-    console.log(result); // {count: 2}
+    console.log(result); // {count: 1000}
 });
-$.JSON('/api/book?skip=2&limit=1', function(books){
-    console.log(books); // [{title: "Book2", _id:22222222}]
+$.JSON('/api/book?skip=500&limit=100', function(books){
+    console.log(books); // [{title: "Book2", _id:22222222}, ...]
 });
 
 
