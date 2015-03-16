@@ -125,6 +125,7 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 ## Last update
 - 2013-03-16 (1.0.0) Initial version
 - 2013-03-16 (1.0.1) Updated README
+- 2013-03-16 (1.0.2) Fixed minor bug on PUT
 
 ## Next steps
 - Options for choosing which model to publish

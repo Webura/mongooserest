@@ -1,6 +1,6 @@
 {
   "name": "mongooserest",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A RESTful API for Mongoose with Express",
   "main": "index.js",
   "dependencies": {},
