@@ -6,7 +6,7 @@ A RESTful API for Mongoose with Express
 
 Add the mongooserest middleware in your express:
 
-```
+```javascript
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongooserest = require("mongooserest");
@@ -25,7 +25,7 @@ app.use('/api', mongooserest(mongoose));
 
 Define your mongoose models
 
-```
+```javascript
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var book = new Schema({
@@ -40,7 +40,7 @@ var Book = mongoose.model('book', book);
 ### GET (find)
 
 
-```
+```javascript
 $.JSON('/api/book', function(books){
     console.log(books); // [{title: "Book1", _id: 11111111}, {title: "Book2", _id:22222222}]
 });
@@ -69,7 +69,7 @@ $.JSON('/api/book?skip=2&limit=1', function(books){
 
 ### POST (insert)
 
-```
+```javascript
 $.post('/api/book', {title:'Book3}, function(book){
     console.log(book); // {title: "Book3", _id: 33333333}
 });
@@ -77,11 +77,11 @@ $.post('/api/book', {title:'Book3}, function(book){
 
 ### PUT (update)
 
-```
+```javascript
 $.ajax({
     url: '/api/book/33333333',
     type:'PUT'
-    data: {title:'Book3a},
+    data: {title:'Book3a'},
     success: function(book){
                 console.log(book); // {title: "Book3a", _id: 33333333}
             }
@@ -90,7 +90,7 @@ $.ajax({
 
 ### DELETE (remove)
 
-```
+```javascript
 $.ajax({
     url: '/api/book/33333333',
     type:'DELETE'
