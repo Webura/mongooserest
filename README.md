@@ -100,9 +100,27 @@ $.ajax({
 });
 ```
 
+## Authentication
+
+You can use the normal Express router pattern to implement authentication
+
+``` javascript
+
+function myAuthentication(req, res, next) {
+  if (req.cookies.token) {
+    //...
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+app.use('/api', myAuthentication, mongooserest(mongoose));
+
+```
+
 ## Next steps
-- Authentication
-- Fine grained options for choosing which model to publish
+- Options for choosing which model to publish
+- Fine grained selection of which fields to be enabled for select or update
 
 ## License
 (The MIT License)

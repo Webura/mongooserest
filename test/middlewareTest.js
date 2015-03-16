@@ -11,7 +11,7 @@ var Schema = mongoose.Schema;
 var book = new Schema({
   title: {type: String, required: 'Title is required', index: {unique: true}}
 });
-var Book = mongoose.model('book', book);
+var Book = mongoose.model('Book', book);
 
 
 app.use(bodyParser.json());
