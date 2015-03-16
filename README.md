@@ -1,6 +1,10 @@
 # mongooserest
 A RESTful API for Mongoose with Express
 
+## Install
+
+`npm install mongooserest`
+
 ## Setup
 
 
