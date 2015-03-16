@@ -122,6 +122,10 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 
 ```
 
+## Last update
+- 2013-03-16 (1.0.0) Initial version
+- 2013-03-16 (1.0.1) Updated README
+
 ## Next steps
 - Options for choosing which model to publish
 - Fine grained selection of which fields to be enabled for select or update
@@ -129,7 +133,7 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 ## License
 (The MIT License)
 
-Copyright (c) 2014 Johnny Tsang &lt;johnny@webura.com&gt;
+Copyright (c) 2015 Johnny Tsang &lt;johnny@webura.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
