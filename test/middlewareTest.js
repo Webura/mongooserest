@@ -171,5 +171,19 @@ describe('mongooserest', function () {
             done(JSON.stringify(books));
         });
     });
+
+    it('should sort by title', function (done) {
+      request(app)
+        .get('/api/book?sort=-title')
+        .set('Accept', 'application/json')
+        .end(function (err, res) {
+          if (err) done(err);
+          var books = JSON.parse(res.text);
+          if (books[0].title == 'Book9')
+            done();
+          else
+            done(JSON.stringify(books));
+        });
+    });
   });
 });

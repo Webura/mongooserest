@@ -68,6 +68,13 @@ $.JSON('/api/book?skip=2&limit=1', function(books){
     console.log(books); // [{title: "Book2", _id:22222222}]
 });
 
+
+//Sort
+javascript
+$.JSON('/api/book?sort=-title', function(books){
+    console.log(books); // [{title: "Book2", _id:22222222}, {title: "Book1", _id: 11111111}]
+});
+
 ```
 
 
@@ -122,11 +129,12 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 
 ```
 
-## Last update
-- 2013-03-16 (1.0.0) Initial version
-- 2013-03-16 (1.0.1) Updated README
-- 2013-03-16 (1.0.2) Fixed minor bug on PUT
-- 2013-03-16 (1.0.3) Use save instead of findAndUpdate, so that the pre-save method in the model is used.
+## Versions
+- 1.0.0 Initial version
+- 1.0.1 Updated README
+- 1.0.2 Fixed minor bug on PUT
+- 1.0.3 Use save instead of findAndUpdate, so that the pre-save method in the model is used.
+- 1.0.4 (2015-03-16) Added sorting, see example in section GET.
 
 ## Next steps
 - Options for choosing which model to publish
