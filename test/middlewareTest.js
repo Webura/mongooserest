@@ -12,15 +12,13 @@ var book = new Schema({
   title: {type: String, required: 'Title is required', index: {unique: true}}
 });
 var Book = mongoose.model('Book', book);
-
-
 app.use(bodyParser.json());
-app.use('/api', mongooserest(mongoose));
 
 
 describe('mongooserest', function () {
-  describe('SETUP', function () {
-    it('should setup the mockup data: 10 books', function (done) {
+  describe('MIDDLEWARE', function () {
+    it('Add middleware to Express and set up mockup data', function (done) {
+      app.use('/api', mongooserest(mongoose));
       Book.remove(function () {
         var books = [];
         for (var i = 1; i <= 10; i++) {
@@ -184,6 +182,16 @@ describe('mongooserest', function () {
           else
             done(JSON.stringify(books));
         });
+    });
+  });
+
+  describe('MODEL NOT FOUND', function () {
+    it('should give pass to next express router if no model is found', function (done) {
+      request(app)
+        .get('/api/none')
+        .set('Accept', 'application/json')
+        .expect(404)
+        .end(done);
     });
   });
 });

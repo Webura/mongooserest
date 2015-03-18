@@ -136,7 +136,8 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 - 1.0.1 Updated README
 - 1.0.2 Fixed minor bug on PUT
 - 1.0.3 Use save instead of findAndUpdate, so that the pre-save method in the model is used.
-- 1.0.4 (2015-03-16) Added sorting, see example in section GET.
+- 1.0.4 Added sorting, see example in section GET.
+- 1.0.5 (2015-03-18) If model does not exist, pass on to next Express router.
 
 ## Next steps
 - Options for choosing which model to publish
