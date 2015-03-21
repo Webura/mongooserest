@@ -46,34 +46,34 @@ var Book = mongoose.model('book', book);
 
 ``` javascript
 //Get all
-$.JSON('/api/book', function(books){
+$.getJSON('/api/book', function(books){
     console.log(books); // [{title: "Book1", _id: 11111111}, {title: "Book2", _id:22222222}]
 });
 
 //Get by id
-$.JSON('/api/book/11111111', function(book){
+$.getJSON('/api/book/11111111', function(book){
     console.log(book); // {title: "Book1", _id: 11111111}
 });
 
 //Filter
 var query = encodeURI(JSON.stringify({title: "book2"}));
-$.JSON('/api/book?query=' + query, function(books){
+$.getJSON('/api/book?query=' + query, function(books){
     console.log(books); // [{title: "Book2", _id:22222222}]
 });
 
 
 //For paging large data set
-$.JSON('/api/book/count', function(result){
+$.getJSON('/api/book/count', function(result){
     console.log(result); // {count: 1000}
 });
-$.JSON('/api/book?skip=500&limit=100', function(books){
+$.getJSON('/api/book?skip=500&limit=100', function(books){
     console.log(books); // [{title: "Book2", _id:22222222}, ...]
 });
 
 
 //Sort
 javascript
-$.JSON('/api/book?sort=-title', function(books){
+$.getJSON('/api/book?sort=-title', function(books){
     console.log(books); // [{title: "Book2", _id:22222222}, {title: "Book1", _id: 11111111}]
 });
 
@@ -113,6 +113,25 @@ $.ajax({
 });
 ```
 
+
+### SCHEMA
+
+
+``` javascript
+//Get mongoose schema
+$.getJSON('/api/book/schema', function(schema){
+    console.log(schema); // {
+                         //   title: {
+                         //     index: {unique: true},
+                         //     default: 'Book',
+                         //     required: 'Title is required',
+                         //     type: 'String'
+                         //     _id: {auto: true, type: 'ObjectId'}
+                         //   }
+                         // }
+});
+```
+
 ## Authentication
 
 You can use the normal Express router pattern to implement authentication
@@ -137,7 +156,8 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 - 1.0.2 Fixed minor bug on PUT
 - 1.0.3 Use save instead of findAndUpdate, so that the pre-save method in the model is used.
 - 1.0.4 Added sorting, see example in section GET.
-- 1.0.5 (2015-03-18) If model does not exist, pass on to next Express router.
+- 1.0.5 If model does not exist, pass on to next Express router.
+- 1.0.6 (2015-03-21) Export mongoose schema
 
 ## Next steps
 - Options for choosing which model to publish

@@ -8,24 +8,38 @@ var mongooserest = require("../");
 var app = express();
 mongoose.connect('mongodb://localhost:27017/test');
 var Schema = mongoose.Schema;
+
+
+var author = new Schema({
+  name: {type: String, required: 'Name is required', index: {unique: true}}
+});
+var Author = mongoose.model('Author', author);
+
 var book = new Schema({
-  title: {type: String, required: 'Title is required', index: {unique: true}}
+  title: {type: String, required: 'Title is required', default: 'Book', index: {unique: true}},
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'Author'
+  }
 });
 var Book = mongoose.model('Book', book);
-app.use(bodyParser.json());
 
+app.use(bodyParser.json());
 
 describe('mongooserest', function () {
   describe('MIDDLEWARE', function () {
     it('Add middleware to Express and set up mockup data', function (done) {
       app.use('/api', mongooserest(mongoose));
-      Book.remove(function () {
-        var books = [];
-        for (var i = 1; i <= 10; i++) {
-          books.push({title: 'Book' + i});
-        }
-        Book.create(books, function () {
-          done();
+      var author = Author({name: 'Johnny'});
+      author.save(function () {
+        Book.remove(function () {
+          var books = [];
+          for (var i = 1; i <= 10; i++) {
+            books.push({title: 'Book' + i, author: author});
+          }
+          Book.create(books, function () {
+            done();
+          });
         });
       });
     });
@@ -191,6 +205,25 @@ describe('mongooserest', function () {
         .get('/api/none')
         .set('Accept', 'application/json')
         .expect(404)
+        .end(done);
+    });
+  });
+
+  describe('SCHEMA', function () {
+    it('should return the model schema if allowed', function (done) {
+      request(app)
+        .get('/api/book/schema')
+        .set('Accept', 'application/json')
+        .expect({
+          title: {
+            index: {unique: true},
+            default: 'Book',
+            required: 'Title is required',
+            type: 'String'
+          },
+          author: {ref: 'Author', type: 'ObjectId'},
+          _id: {auto: true, type: 'ObjectId'}
+        })
         .end(done);
     });
   });
