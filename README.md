@@ -72,9 +72,13 @@ $.getJSON('/api/book?skip=500&limit=100', function(books){
 
 
 //Sort
-javascript
 $.getJSON('/api/book?sort=-title', function(books){
     console.log(books); // [{title: "Book2", _id:22222222}, {title: "Book1", _id: 11111111}]
+});
+
+//Select
+$.getJSON('/api/book?sort=-title&select=title', function(books){
+    console.log(books); // [{title: "Book2"}, {title: "Book1"}]
 });
 
 ```
@@ -157,7 +161,8 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 - 1.0.3 Use save instead of findAndUpdate, so that the pre-save method in the model is used.
 - 1.0.4 Added sorting, see example in section GET.
 - 1.0.5 If model does not exist, pass on to next Express router.
-- 1.0.6 (2015-03-21) Export mongoose schema
+- 1.0.6 Export mongoose schema
+- 1.0.7 (2015-07-04) Added `select` for selecting specific fields, better performance and save bandwidth.
 
 ## Next steps
 - Options for choosing which model to publish
