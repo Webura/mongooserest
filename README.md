@@ -163,6 +163,7 @@ app.use('/api', myAuthentication, mongooserest(mongoose));
 - 1.0.5 If model does not exist, pass on to next Express router.
 - 1.0.6 Export mongoose schema
 - 1.0.7 (2015-07-04) Added `select` for selecting specific fields, better performance and save bandwidth.
+- 1.0.8 (2015-07-04) Fixed bug related to version 1.0.7
 
 ## Next steps
 - Options for choosing which model to publish
